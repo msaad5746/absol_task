@@ -21,6 +21,27 @@ class SearchPage extends GetView<SearchController> {
       children: [
         verticalSpacer(60),
         inputField(controller.searchController),
+        Obx(
+          () => Expanded(
+            child: ListView.separated(
+              itemCount: controller.searchedData.length,
+              itemBuilder: (context, index) {
+                return HomeItem(
+                  name: controller.searchedData[index].country,
+                  value: controller.searchedData[index].totalConfirmed,
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Divider(
+                  height: 1,
+                  indent: 0,
+                  endIndent: 0,
+                  color: colors.background,
+                );
+              },
+            ),
+          ),
+        ),
       ],
     );
   }

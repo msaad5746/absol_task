@@ -10,7 +10,7 @@ class SearchController extends GetxController with StateMixin<SearchPage> {
   TextEditingController searchController = TextEditingController();
 
   List<Countries> data = List.empty(growable: true);
-  var searchedData= Rx<List<Countries>>;
+  List<Countries> searchedData = <Countries>[].obs;
 
   @override
   void onInit() {
@@ -20,5 +20,14 @@ class SearchController extends GetxController with StateMixin<SearchPage> {
     super.onInit();
   }
 
-  onSearch(String value) {}
+  onSearch(String value) {
+    searchedData.clear();
+    if (value.isNotEmpty) {
+      data.forEach((element) {
+        if (element.country!.contains(value)) {
+          searchedData.add(element);
+        }
+      });
+    }
+  }
 }
