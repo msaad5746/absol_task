@@ -1,26 +1,61 @@
-import 'package:flutter/cupertino.dart';
+import 'package:absol_task/export.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 
 class AppRoutes {
-  static const String initializerPage = '/';
-  static const String homePage = '/homePage';
+  final arg;
 
-  static appRoutes(final RouteSettings settings,
-      BuildContext context) {
-    switch (settings.name) {
-      case homePage:
-        openHomePage(context);
-        break;
+  AppRoutes({this.arg});
+
+  static List<GetPage> getPage = [
+    GetPage(
+      name: RouteNames.splashScreen,
+      page: () => Splash(),
+      binding: SplashBinding(),
+    ),
+    GetPage(
+      name: RouteNames.tabs,
+      page: () => Tabs(),
+      binding: TabsBinding(),
+    ),
+    GetPage(
+      name: RouteNames.homeScreen,
+      page: () => HomePage(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: RouteNames.searchScreen,
+      page: () => HomePage(),
+      binding: SearchBinding(),
+    ),
+    GetPage(
+      name: RouteNames.detailsScreen,
+      page: () =>DetailsPage(),
+      binding: DetailsBinding(),
+    ),
+
+  ];
+
+  static Future<dynamic>? appRoutes(final String routeName, {arg}) {
+    switch (routeName) {
+      //push to next
+      case RouteNames.splashScreen:
+      case RouteNames.detailsScreen:
+      case RouteNames.searchScreen:
+        return Get.toNamed(routeName, arguments: arg);
+
+      //clear all and push
+      case RouteNames.tabs:
+      case RouteNames.homeScreen:
+        return Get.offAllNamed(routeName, arguments: arg);
 
       default:
-        throw UnimplementedError('Route is not implemented!');
+        return _errorRoute();
     }
   }
-}
-  void openHomePage(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      AppRoutes.homePage,
-    );
-  }
 
+  static Future<dynamic>? _errorRoute() {
+    return Get.to(Container());
+  }
+}
