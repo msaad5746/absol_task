@@ -18,5 +18,4 @@ class AppColors {
 
   final Color naturalWhite = const Color(0xffFFFFFF);
   final Color systemBlueLight = const Color(0xff007aff);
-
 }

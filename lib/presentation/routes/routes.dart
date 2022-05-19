@@ -15,6 +15,11 @@ class AppRoutes {
       binding: SplashBinding(),
     ),
     GetPage(
+      name: RouteNames.tabs,
+      page: () => Tabs(),
+      binding: TabsBinding(),
+    ),
+    GetPage(
       name: RouteNames.homeScreen,
       page: () => HomePage(),
       binding: HomeBinding(),
@@ -26,7 +31,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteNames.detailsScreen,
-      page: () => HomePage(),
+      page: () =>DetailsPage(),
       binding: DetailsBinding(),
     ),
 
@@ -36,10 +41,12 @@ class AppRoutes {
     switch (routeName) {
       //push to next
       case RouteNames.splashScreen:
+      case RouteNames.detailsScreen:
       case RouteNames.searchScreen:
         return Get.toNamed(routeName, arguments: arg);
 
       //clear all and push
+      case RouteNames.tabs:
       case RouteNames.homeScreen:
         return Get.offAllNamed(routeName, arguments: arg);
 

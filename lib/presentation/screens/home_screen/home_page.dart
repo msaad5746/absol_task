@@ -31,9 +31,13 @@ class HomePage extends GetView<HomeController> {
               fontWeight: FontWeight.bold,
             );
           }
-          return HomeItem(
-            name: controller.data.countries![index-1].country,
-            value: controller.data.countries![index-1].totalConfirmed,
+          return GestureDetector(
+            onTap: () => controller
+                .openDetailsPage(controller.data.countries![index - 1]),
+            child: HomeItem(
+              name: controller.data.countries![index - 1].country,
+              value: controller.data.countries![index - 1].totalConfirmed,
+            ),
           );
         },
         separatorBuilder: (context, index) => Divider(

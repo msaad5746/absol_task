@@ -21,6 +21,6 @@ class SplashController extends GetxController with StateMixin<Splash> {
   }
 
   void navigateToHome() {
-    AppRoutes.appRoutes(RouteNames.homeScreen);
+    AppRoutes.appRoutes(RouteNames.tabs);
   }
 }

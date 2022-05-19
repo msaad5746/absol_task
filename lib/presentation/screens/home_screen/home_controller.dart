@@ -22,4 +22,8 @@ class HomeController extends GetxController with StateMixin<HomePage> {
   }
 
   HomeModel get data => useCase.data;
+
+  openDetailsPage(Countries data) {
+    AppRoutes.appRoutes(RouteNames.detailsScreen, arg: data);
+  }
 }
